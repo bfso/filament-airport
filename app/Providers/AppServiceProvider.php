@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         setlocale(LC_TIME, 'de_DE.utf8');
 
-        Filament::registerStyles([
-            asset('css/app.css'),
-        ]);
+        //Filament::registerStyles([
+        //    asset('css/app.css'),
+        //]);
 
         Filament::serving(function() {
             Filament::registerNavigationGroups([
