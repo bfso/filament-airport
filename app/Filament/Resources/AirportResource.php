@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AirportResource\Pages;
-use App\Filament\Resources\AirportResource\RelationManagers;
 use App\Models\Airport;
 use Filament\Forms;
 use Filament\Forms\Form;
