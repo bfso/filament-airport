@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AirportResource\Pages;
-use App\Models\Airport;
+use App\Filament\Resources\PassengerResource\Pages;
+use App\Filament\Resources\PassengerResource\RelationManagers;
+use App\Models\Passenger;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,18 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AirportResource extends Resource
+class PassengerResource extends Resource
 {
-    protected static ?string $model = Airport::class;
+    protected static ?string $model = Passenger::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('short_name')->required(),
+                Forms\Components\TextInput::make('email')->required(),
             ]);
     }
 
@@ -31,8 +31,7 @@ class AirportResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('short_name'),
+                Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
                 //
@@ -60,9 +59,9 @@ class AirportResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAirports::route('/'),
-            'create' => Pages\CreateAirport::route('/create'),
-            'edit' => Pages\EditAirport::route('/{record}/edit'),
+            'index' => Pages\ListPassengers::route('/'),
+            'create' => Pages\CreatePassenger::route('/create'),
+            'edit' => Pages\EditPassenger::route('/{record}/edit'),
         ];
     }
 }

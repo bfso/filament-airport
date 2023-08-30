@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AirportResource\Pages;
-use App\Models\Airport;
+use App\Filament\Resources\PassengerFlightResource\Pages;
+use App\Filament\Resources\PassengerFlightResource\RelationManagers;
+use App\Models\PassengerFlight;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,18 +13,18 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AirportResource extends Resource
+class PassengerFlightResource extends Resource
 {
-    protected static ?string $model = Airport::class;
+    protected static ?string $model = PassengerFlight::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static ?string $navigationIcon = 'heroicon-o-play';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('short_name')->required(),
+                Forms\Components\Select::make('passenger_id')->relationship('passenger', 'email'),
+                Forms\Components\Select::make('flight_id')->relationship('flight', 'number'),
             ]);
     }
 
@@ -31,8 +32,10 @@ class AirportResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('short_name'),
+                Tables\Columns\TextColumn::make('passenger.email'),
+                Tables\Columns\TextColumn::make('flight.number')->label('Flight Number'),
+                Tables\Columns\TextColumn::make('flight.start.short_name')->label('Start airport'),
+                Tables\Columns\TextColumn::make('flight.end.short_name')->label('End airport'),
             ])
             ->filters([
                 //
@@ -60,9 +63,9 @@ class AirportResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAirports::route('/'),
-            'create' => Pages\CreateAirport::route('/create'),
-            'edit' => Pages\EditAirport::route('/{record}/edit'),
+            'index' => Pages\ListPassengerFlights::route('/'),
+            'create' => Pages\CreatePassengerFlight::route('/create'),
+            'edit' => Pages\EditPassengerFlight::route('/{record}/edit'),
         ];
     }
 }
