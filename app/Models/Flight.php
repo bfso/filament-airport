@@ -23,6 +23,11 @@ class Flight extends Model {
         'arrival_date',
     ];
 
+
+    public function passengers(){
+        return $this->belongsToMany(Passenger::class,'passenger_flight');
+    }
+
     public function airplane() {
         return $this->belongsTo(Airplane::class);
     }

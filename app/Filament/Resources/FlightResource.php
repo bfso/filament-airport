@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FlightResource\Pages;
 use App\Filament\Resources\FlightResource\RelationManagers;
+use App\Models\Airplane;
+use App\Models\Airport;
 use App\Models\Flight;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,10 +25,24 @@ class FlightResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('number')->required(),
-                Forms\Components\Select::make('airplane_id')->relationship('airplane', 'typ'),
-                Forms\Components\Select::make('start_airport_id')->relationship('start', 'short_name'),
-                Forms\Components\Select::make('end_airport_id')->relationship('end', 'short_name'),
+                Forms\Components\TextInput::make('number')
+                    ->required()
+                    ->default(function(){return rand(1000,9999);}),
+                Forms\Components\Select::make('airplane_id')
+                    ->relationship('airplane', 'typ')
+                    ->default(function(){return Airplane::inRandomOrder()->first()->id;}),
+                Forms\Components\Select::make('start_airport_id')
+                    ->relationship('start', 'short_name')
+                    ->default(function(){return Airport::inRandomOrder()->first()->id;}),
+                Forms\Components\Select::make('end_airport_id')
+                    ->relationship('end', 'short_name')
+                    ->default(function(){return Airport::inRandomOrder()->first()->id;}),
+                Forms\Components\DatePicker::make('departure_date')
+                    ->required()
+                    ->default(function(){return now();}),
+                Forms\Components\DatePicker::make('arrival_date')
+                    ->required()
+                    ->default(function(){return now();}),
             ]);
     }
 
@@ -58,7 +74,7 @@ class FlightResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PassengersRelationManager::class
         ];
     }
 

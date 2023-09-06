@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class PassengerFlight extends Pivot
+class PassengerFlight extends Model
 {
     use HasFactory;
 
     public $table = 'passenger_flight';
 
     public $fillable = [
+        'id',
         'passenger_id',
         'flight_id',
     ];

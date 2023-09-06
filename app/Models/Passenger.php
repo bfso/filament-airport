@@ -10,4 +10,8 @@ class Passenger extends Model
     use HasFactory;
 
     public $fillable = ['email'];
+
+    public function flights(){
+        return $this->belongsToMany(Flight::class,'passenger_flight');
+    }
 }
