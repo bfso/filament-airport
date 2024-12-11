@@ -37,11 +37,11 @@ class PassengerResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-//                Tables\Columns\TextColumn::make('collision')->getStateUsing(
-//                    function (Passenger $record) {
-//                        return FlightCollisionDetector::run($record);
-//                    }
-//                ),
+                Tables\Columns\TextColumn::make('collision')->getStateUsing(
+                    function (Passenger $record) {
+                        return FlightCollisionDetector::run($record);
+                    }
+                ),
 
                 Tables\Columns\TextColumn::make('flights.number')
                     ->listWithLineBreaks(),
