@@ -73,11 +73,7 @@ class FlightResource extends Resource
                     ->numeric()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('count')
-                    ->getStateUsing(function ($record){
-                        return $record->passengers->count();
-                    })
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('passengers_count'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -95,6 +91,9 @@ class FlightResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
+            ->modifyQueryUsing(function ($query){
+                return $query->withCount('passengers');
+            })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
