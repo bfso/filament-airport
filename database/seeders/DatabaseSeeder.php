@@ -54,6 +54,11 @@ class DatabaseSeeder extends Seeder
             'name'=>'London',
         ]);
 
+        $airportBos = Airport::create([
+            'short_name'=>'BOS',
+            'name'=>'Boston',
+        ]);
+
         $flight1 = Flight::create([
             'number'=>'255686',
             'departure_date'=>now(),
@@ -70,6 +75,15 @@ class DatabaseSeeder extends Seeder
             'airplane_id'=>$planeA380->id,
             'start_airport_id'=>$airportJfk->id,
             'end_airport_id'=>$airportLhr->id,
+        ]);
+
+        $flight2 = Flight::create([
+            'number'=>'915556',
+            'departure_date'=>now(),
+            'arrival_date'=>now()->addHours(6),
+            'airplane_id'=>$planeA380->id,
+            'start_airport_id'=>$airportZrh->id,
+            'end_airport_id'=>$airportBos->id,
         ]);
 
         $passenger1 = Passenger::create(['email' => 'passener1@bfo.ch']);
