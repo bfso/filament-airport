@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\FlightResource\Pages;
+namespace App\Filament\Resources\Flights\Pages;
 
-use App\Filament\Resources\FlightResource;
-use Filament\Actions;
+use App\Filament\Resources\Flights\FlightResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateFlight extends CreateRecord

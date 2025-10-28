@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\FlightResource\Pages;
+namespace App\Filament\Resources\Flights\Pages;
 
-use App\Filament\Resources\FlightResource;
+use App\Filament\Resources\Flights\FlightResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

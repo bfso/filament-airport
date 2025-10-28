@@ -1,53 +1,23 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Flights\Tables;
 
-use App\Filament\Resources\FlightResource\Pages;
-use App\Models\Flight;
+
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms;
-use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables;
 
-class FlightResource extends Resource
+class FlightsTable
 {
-    protected static ?string $model = Flight::class;
-
-    protected static string|null|\BackedEnum $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    public static function form(Schema $schema): Schema
-    {
-        return $schema
-            ->schema([
-                Forms\Components\TextInput::make('number')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('departure_date')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('arrival_date')
-                    ->required(),
-                Forms\Components\Select::make('airplane_id')
-                    ->relationship('airplane', 'typ')
-                    ->required(),
-                Forms\Components\Select::make('start_airport_id')
-                    ->required()
-                    ->relationship('start', 'short_name'),
-                Forms\Components\Select::make('end_airport_id')
-                    ->required()
-                    ->relationship('end', 'short_name'),
-            ]);
-    }
-
-    public static function table(Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('number')
-                    ->searchable(),
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('start.short_name')
                     ->numeric()
@@ -90,6 +60,7 @@ class FlightResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->modifyQueryUsing(function ($query){
                 return $query->withCount('passengers');
@@ -99,21 +70,5 @@ class FlightResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListFlights::route('/'),
-            'create' => Pages\CreateFlight::route('/create'),
-            'edit' => Pages\EditFlight::route('/{record}/edit'),
-        ];
     }
 }

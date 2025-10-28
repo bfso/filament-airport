@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\PassengerResource\Pages;
+namespace App\Filament\Resources\Passengers\Pages;
 
-use App\Filament\Resources\PassengerResource;
+use App\Filament\Resources\Passengers\PassengerResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

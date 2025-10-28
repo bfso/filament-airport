@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\PassengerResource\RelationManagers;
+namespace App\Filament\Resources\Passengers\RelationManagers;
 
 use Filament\Actions\AttachAction;
 use Filament\Actions\DetachAction;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\FlightResource\RelationManagers;
+namespace App\Filament\Resources\Flights\RelationManagers;
 
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
