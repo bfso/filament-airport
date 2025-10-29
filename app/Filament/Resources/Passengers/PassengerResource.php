@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources\Passengers;
 
-use App\Filament\Resources\Flights\Schemas\FlightForm;
 use App\Filament\Resources\Passengers\Schemas\PassengerForm;
 use App\Filament\Resources\Passengers\Tables\PassengersTable;
 use App\Models\Passenger;
-use Filament\Actions\EditAction;
 
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
